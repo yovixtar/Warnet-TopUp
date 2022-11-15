@@ -30,15 +30,17 @@ class OrderPage extends StatelessWidget {
             Image.asset(
               "assets/cart_icon.png",
               width: 100,
+              // color: secondaryColor,
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             Text(
               "Oopss, Your Order is Empty",
               style: primaryTextStyle.copyWith(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: medium,
+                color: secondaryColor,
               ),
               textAlign: TextAlign.center,
             ),
