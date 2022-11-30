@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
                   color: primaryColor,
                 ),
                 child: Text(
-                  'All Games',
+                  'All Game',
                   style: primaryTextStyle.copyWith(
                     fontSize: 13,
                     fontWeight: medium,
@@ -182,6 +182,26 @@ class HomePage extends StatelessWidget {
                     )),
                 child: Text(
                   'Voucher Games',
+                  style: subtitleTextStyle.copyWith(
+                    fontSize: 13,
+                    fontWeight: medium,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(right: 10),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: transparanColor,
+                    border: Border.all(
+                      color: subtitleText,
+                    )),
+                child: Text(
+                  'Entertainment',
                   style: subtitleTextStyle.copyWith(
                     fontSize: 13,
                     fontWeight: medium,
