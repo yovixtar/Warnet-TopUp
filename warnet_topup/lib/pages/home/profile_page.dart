@@ -14,46 +14,80 @@ class ProfilePage extends StatelessWidget {
         flexibleSpace: SafeArea(
           child: Container(
             padding: EdgeInsets.all(defaultMargin),
-            child: Row(
+            child: Column(
               children: [
-                ClipOval(
-                  child: Image.asset(
-                    "assets/user_avatar.png",
-                    width: 64,
+                Row(
+                  children: [
+                    ClipOval(
+                      child: Image.asset(
+                        "assets/user_avatar.png",
+                        width: 64,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Khazim Fikri",
+                            style: primaryTextStyle.copyWith(
+                              fontSize: 20,
+                              fontWeight: semibold,
+                            ),
+                          ),
+                          Text(
+                            "@khazimstar",
+                            style: subtitleTextStyle.copyWith(
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      icon: Image.asset(
+                        "assets/logout.png",
+                        width: 25,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/sign-in', (route) => false);
+                      },
+                    ),
+                  ],
+                ),
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(
+                    top: 20,
+                    left: defaultMargin,
+                    right: defaultMargin,
                   ),
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  decoration: BoxDecoration(
+                    color: bgColor_2,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  padding: EdgeInsets.all(25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Khazim Fikri",
+                        "Saldo Anda :",
                         style: primaryTextStyle.copyWith(
-                          fontSize: 20,
-                          fontWeight: semibold,
+                          fontSize: 14,
                         ),
                       ),
                       Text(
-                        "@khazimstar",
-                        style: subtitleTextStyle.copyWith(
+                        "Rp 50.000",
+                        style: priceTextStyle.copyWith(
                           fontSize: 16,
                         ),
                       )
                     ],
                   ),
-                ),
-                IconButton(
-                  icon: Image.asset(
-                    "assets/logout.png",
-                    width: 25,
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/sign-in', (route) => false);
-                  },
                 ),
               ],
             ),

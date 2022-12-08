@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:warnet_topup/pages/checkout_page.dart';
 import 'package:warnet_topup/pages/home/main_page.dart';
 import 'package:warnet_topup/pages/order_page.dart';
 import 'package:warnet_topup/pages/product_detail_page.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => MainPage(),
         '/orders': (context) => OrderPage(),
         '/product-detail': ((context) => ProductDetail()),
+        '/checkout': ((context) => CheckoutPage()),
       },
     );
   }

@@ -40,7 +40,7 @@ class ProductDetail extends StatelessWidget {
           ),
           Text(
             "Warnet SM Cangak",
-            style: blackTextStyle.copyWith(fontSize: 30),
+            style: primaryTextStyle.copyWith(fontSize: 30),
           ),
         ],
       );
@@ -246,6 +246,39 @@ class ProductDetail extends StatelessWidget {
       ]);
     }
 
+    Widget submitButton() {
+      return Container(
+        margin: EdgeInsets.only(
+          bottom: 20,
+        ),
+        child: Container(
+          height: 50,
+          width: double.infinity,
+          margin: EdgeInsets.only(
+            top: 40,
+          ),
+          child: TextButton(
+            child: Text(
+              "Top Up",
+              style: primaryTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: medium,
+              ),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/checkout');
+            },
+          ),
+        ),
+      );
+    }
+
     Widget content() {
       return Container(
         margin: EdgeInsets.only(
@@ -341,6 +374,7 @@ class ProductDetail extends StatelessWidget {
                   idEmailInput(),
                   zonaInput(),
                   ServerInput(),
+                  submitButton(),
                 ],
               ),
             )
@@ -350,7 +384,7 @@ class ProductDetail extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: primaryText,
+      backgroundColor: primaryColor,
       body: ListView(
         children: [
           header(),
