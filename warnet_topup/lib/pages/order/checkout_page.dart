@@ -245,7 +245,7 @@ class CheckoutPage extends StatelessWidget {
     );
   }
 
-  Widget checkoutButton() {
+  Widget checkoutButton(context) {
     return Container(
       height: 50,
       width: double.infinity,
@@ -267,12 +267,15 @@ class CheckoutPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/checkout-success', (route) => false);
+        },
       ),
     );
   }
 
-  Widget content() {
+  Widget content(context) {
     return ListView(
       padding: EdgeInsets.symmetric(
         horizontal: defaultMargin,
@@ -280,7 +283,7 @@ class CheckoutPage extends StatelessWidget {
       children: [
         detailPlayer(),
         checkoutSummary(),
-        checkoutButton(),
+        checkoutButton(context),
       ],
     );
   }
@@ -290,7 +293,7 @@ class CheckoutPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor_3,
       appBar: header(),
-      body: content(),
+      body: content(context),
     );
   }
 }
