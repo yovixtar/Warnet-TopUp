@@ -36,7 +36,7 @@ class ProductDetail extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 40,
           ),
           Text(
             "Warnet SM Cangak",
@@ -282,7 +282,7 @@ class ProductDetail extends StatelessWidget {
     Widget content() {
       return Container(
         margin: EdgeInsets.only(
-          top: 17,
+          top: 40,
         ),
         width: double.infinity,
         decoration: BoxDecoration(

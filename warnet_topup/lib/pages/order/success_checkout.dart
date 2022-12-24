@@ -51,7 +51,10 @@ class CheckoutSuccessPage extends StatelessWidget {
             Container(
               height: 44,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/orders', (route) => false);
+                },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     horizontal: 30,

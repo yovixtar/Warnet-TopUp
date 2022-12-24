@@ -17,6 +17,7 @@ Color secondaryText = Color(0xff999999);
 Color subtitleText = Color(0xff504F5E);
 Color transparanColor = Colors.transparent;
 Color blackColor = Color(0xff2E2E2E);
+Color successColor = Color(0xff22bb33);
 
 TextStyle primaryTextStyle = TextStyle(
   color: primaryText,
@@ -41,6 +42,16 @@ TextStyle subtitleTextStyle = TextStyle(
 TextStyle blackTextStyle = TextStyle(
   fontFamily: 'KeepCalm',
   color: blackColor,
+);
+
+TextStyle alertTextStyle = TextStyle(
+  fontFamily: 'KeepCalm',
+  color: alertColor,
+);
+
+TextStyle successTextStyle = TextStyle(
+  fontFamily: 'KeepCalm',
+  color: successColor,
 );
 
 FontWeight light = FontWeight.w300;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:warnet_topup/theme.dart';
+import 'package:warnet_topup/widgets/order_card.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
@@ -22,7 +23,7 @@ class OrderPage extends StatelessWidget {
       );
     }
 
-    Widget content() {
+    Widget empty_order() {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,10 +89,54 @@ class OrderPage extends StatelessWidget {
       );
     }
 
+    Widget homeButton() {
+      return Container(
+        height: 50,
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 20,
+        ),
+        child: TextButton(
+          child: Text(
+            "Back to Home",
+            style: primaryTextStyle.copyWith(
+              fontSize: 18,
+              fontWeight: medium,
+            ),
+          ),
+          style: TextButton.styleFrom(
+            backgroundColor: primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/home', (route) => false);
+          },
+        ),
+      );
+    }
+
+    Widget content() {
+      return ListView(
+        padding: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
+        children: [
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+        ],
+      );
+    }
+
     return Scaffold(
       backgroundColor: bgColor_3,
       appBar: header(),
       body: content(),
+      bottomNavigationBar: homeButton(),
     );
   }
 }
