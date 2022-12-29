@@ -39,7 +39,7 @@ class ProductDetail extends StatelessWidget {
             height: 40,
           ),
           Text(
-            "Warnet SM Cangak",
+            "Free Fire",
             style: primaryTextStyle.copyWith(fontSize: 30),
           ),
         ],

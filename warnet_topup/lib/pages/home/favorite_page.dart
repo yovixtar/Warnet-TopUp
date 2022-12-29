@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:warnet_topup/theme.dart';
+import 'package:warnet_topup/widgets/wistlist_card.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
@@ -22,7 +23,7 @@ class FavoritePage extends StatelessWidget {
       );
     }
 
-    Widget content() {
+    Widget emptyWishlist() {
       return Expanded(
         child: Container(
           width: double.infinity,
@@ -85,6 +86,23 @@ class FavoritePage extends StatelessWidget {
           ),
         ),
       );
+    }
+
+    Widget content() {
+      return Expanded(
+          child: Container(
+        color: bgColor_3,
+        padding: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
+        child: ListView(
+          children: [
+            WishlistCard(),
+            WishlistCard(),
+            WishlistCard(),
+          ],
+        ),
+      ));
     }
 
     return Column(
