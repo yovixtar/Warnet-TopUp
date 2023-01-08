@@ -246,6 +246,116 @@ class ProductDetail extends StatelessWidget {
       ]);
     }
 
+    Widget CurrencyInput() {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              top: 25,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Nominal Topup",
+                  style: TextStyle(
+                    color: primaryText,
+                    fontSize: 18,
+                    fontWeight: medium,
+                  ),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 13,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: primaryColor,
+                        ),
+                        child: Text(
+                          '10 Diamonds',
+                          style: primaryTextStyle.copyWith(
+                            fontSize: 14,
+                            fontWeight: medium,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 13,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: primaryColor,
+                        ),
+                        child: Text(
+                          '10 Diamonds',
+                          style: primaryTextStyle.copyWith(
+                            fontSize: 14,
+                            fontWeight: medium,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 13,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: primaryColor,
+                        ),
+                        child: Text(
+                          '10 Diamonds',
+                          style: primaryTextStyle.copyWith(
+                            fontSize: 14,
+                            fontWeight: medium,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 13,
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: transparanColor,
+                            border: Border.all(
+                              color: subtitleText,
+                            )),
+                        child: Text(
+                          '50 Diamonds',
+                          style: subtitleTextStyle.copyWith(
+                            fontSize: 14,
+                            fontWeight: medium,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+
     Widget submitButton() {
       return Container(
         margin: EdgeInsets.only(
@@ -372,8 +482,7 @@ class ProductDetail extends StatelessWidget {
               child: Column(
                 children: [
                   idEmailInput(),
-                  zonaInput(),
-                  ServerInput(),
+                  CurrencyInput(),
                   submitButton(),
                 ],
               ),

@@ -4,12 +4,14 @@ import 'package:warnet_topup/models/users_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
+  String baseUrl = "https://project.kuliah.iyabos.com/topup-v1";
+
   Future<UsersModel?> login({
     String? username,
     String? password,
   }) async {
     var response = await http.post(
-      Uri.parse("https://project.kuliah.iyabos.com/topup-v1/login.php"),
+      Uri.parse(baseUrl + "/login.php"),
       body: {
         'username': username,
         'password': password,
@@ -18,7 +20,7 @@ class AuthService {
     print("Username - Password : " + username! + " - " + password!);
     print("Status : " + jsonDecode(response.body)['meta']['status']);
     if (jsonDecode(response.body)['meta']['status'] == 'success') {
-      print(jsonDecode(response.body)['data']);
+      print(jsonDecode(response.body));
       // var data = jsonDecode(response.body)['data'];
       UsersModel user = UsersModel.fromJson(jsonDecode(response.body)['data']);
       return user;

@@ -1,8 +1,23 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:warnet_topup/models/games_model.dart';
+import 'package:warnet_topup/providers/categories_provider.dart';
 import 'package:warnet_topup/theme.dart';
 
-class GameCard extends StatelessWidget {
-  const GameCard({super.key});
+import '../models/categories_model.dart';
+
+class GameCard extends StatefulWidget {
+  const GameCard(this.game, {super.key});
+
+  final GamesModel game;
+
+  @override
+  State<GameCard> createState() => _GameCardState();
+}
+
+class _GameCardState extends State<GameCard> {
+  // GameCard(this.game);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +42,7 @@ class GameCard extends StatelessWidget {
               height: 15,
             ),
             Image.asset(
-              "assets/games/freefire.png",
+              "assets/games/${widget.game.image}",
               width: 215,
               height: 120,
               fit: BoxFit.cover,
@@ -41,7 +56,7 @@ class GameCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Game FPS',
+                    "${widget.game.category_name}",
                     style: secondaryTextStyle.copyWith(
                       fontSize: 12,
                     ),
@@ -50,7 +65,7 @@ class GameCard extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    'Free Fire',
+                    '${widget.game.name}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: semibold,

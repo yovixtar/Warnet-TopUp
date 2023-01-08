@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:warnet_topup/providers/games_provider.dart';
 import 'package:warnet_topup/theme.dart';
 
 class SplashPage extends StatefulWidget {
@@ -15,14 +17,15 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(
-      Duration(
-        seconds: 3,
-      ),
-      () => Navigator.pushNamed(
-        context,
-        '/sign-in',
-      ),
+
+    getInit();
+  }
+
+  getInit() async {
+    await Provider.of<GamesProvider>(context, listen: false).getGames();
+    Navigator.pushNamed(
+      context,
+      '/sign-in',
     );
   }
 

@@ -2,19 +2,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:warnet_topup/models/games_model.dart';
 import 'package:warnet_topup/models/users_model.dart';
 import 'package:warnet_topup/providers/auth_provider.dart';
+import 'package:warnet_topup/providers/games_provider.dart';
 import 'package:warnet_topup/theme.dart';
 import 'package:warnet_topup/widgets/game_card.dart';
 import 'package:warnet_topup/widgets/game_tile.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-
+    GamesProvider gamesProvider = Provider.of<GamesProvider>(context);
     UsersModel user = authProvider.user;
 
     Widget header() {
@@ -251,11 +258,8 @@ class HomePage extends StatelessWidget {
                 width: defaultMargin,
               ),
               Row(
-                children: [
-                  GameCard(),
-                  GameCard(),
-                  GameCard(),
-                ],
+                children:
+                    gamesProvider.games.map((game) => GameCard(game)).toList(),
               )
             ],
           ),
@@ -286,15 +290,7 @@ class HomePage extends StatelessWidget {
           top: 14,
         ),
         child: Column(
-          children: [
-            GameTile(),
-            GameTile(),
-            GameTile(),
-            GameTile(),
-            GameTile(),
-            GameTile(),
-            GameTile(),
-          ],
+          children: gamesProvider.games.map((game) => GameTile(game)).toList(),
         ),
       );
     }

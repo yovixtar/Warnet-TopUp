@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:warnet_topup/models/games_model.dart';
 import 'package:warnet_topup/theme.dart';
 
-class GameTile extends StatelessWidget {
-  const GameTile({super.key});
+class GameTile extends StatefulWidget {
+  const GameTile(this.game, {super.key});
+  final GamesModel game;
 
+  @override
+  State<GameTile> createState() => _GameTileState();
+}
+
+class _GameTileState extends State<GameTile> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,7 +28,7 @@ class GameTile extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                'assets/games/freefire.png',
+                'assets/games/${widget.game.image}',
                 width: 155,
                 height: 90,
                 fit: BoxFit.cover,
@@ -35,7 +42,7 @@ class GameTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Game FPS",
+                    "${widget.game.category_name}",
                     style: subtitleTextStyle.copyWith(
                       fontSize: 12,
                     ),
@@ -44,7 +51,7 @@ class GameTile extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Free Fire",
+                    "${widget.game.name}",
                     style: primaryTextStyle.copyWith(
                       fontSize: 20,
                       fontWeight: semibold,
