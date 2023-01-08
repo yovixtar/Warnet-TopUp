@@ -1,11 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:warnet_topup/providers/auth_provider.dart';
 import 'package:warnet_topup/theme.dart';
+import 'package:warnet_topup/widgets/loading_button.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  TextEditingController usernameController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
+  bool _passwordVisible = false;
+
+  bool isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignIn() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.login(
+        username: usernameController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushNamed(context, '/home');
+      } else {
+        notif(context, "Gagal Login !", Colors.redAccent);
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(
@@ -79,6 +114,7 @@ class SignInPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: usernameController,
                       style: primaryTextStyle,
                       decoration: InputDecoration.collapsed(
                         hintText: "Your Username",
@@ -135,13 +171,29 @@ class SignInPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: passwordController,
                       style: primaryTextStyle,
-                      obscureText: true,
+                      obscureText: !_passwordVisible,
                       decoration: InputDecoration.collapsed(
                         hintText: "Your Password",
                         hintStyle: subtitleTextStyle,
                       ),
                     ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      // Based on passwordVisible state choose the icon
+                      _passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: primaryColor,
+                    ),
+                    onPressed: () {
+                      // Update the state i.e. toogle the state of passwordVisible variable
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -172,9 +224,7 @@ class SignInPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/home');
-          },
+          onPressed: handleSignIn,
         ),
       );
     }
@@ -192,7 +242,7 @@ class SignInPage extends StatelessWidget {
             header(),
             usernameInput(),
             passwordInput(),
-            signInButton(),
+            isLoading ? LoadingButton() : signInButton(),
           ],
         ),
       ),

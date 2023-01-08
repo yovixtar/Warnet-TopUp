@@ -307,7 +307,7 @@ class ProductDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Diamond Free Fire",
+                          "Top Up Free Fire",
                           style: primaryTextStyle.copyWith(
                             fontSize: 18,
                             fontWeight: semibold,

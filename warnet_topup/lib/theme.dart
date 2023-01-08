@@ -59,3 +59,13 @@ FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
 FontWeight semibold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
+
+void notif(context, String notif, Color? warna) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: warna,
+      content: Text(notif),
+      duration: Duration(seconds: 5),
+    ),
+  );
+}

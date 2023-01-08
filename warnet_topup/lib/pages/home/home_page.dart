@@ -1,6 +1,9 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:warnet_topup/models/users_model.dart';
+import 'package:warnet_topup/providers/auth_provider.dart';
 import 'package:warnet_topup/theme.dart';
 import 'package:warnet_topup/widgets/game_card.dart';
 import 'package:warnet_topup/widgets/game_tile.dart';
@@ -10,6 +13,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    UsersModel user = authProvider.user;
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(
@@ -24,7 +31,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hello, Khazim',
+                    'Hello, ${user.fullname}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 24,
                       fontWeight: semibold,
@@ -34,7 +41,7 @@ class HomePage extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    '@khazimstar',
+                    '@${user.username}',
                     style: subtitleTextStyle.copyWith(
                       fontSize: 16,
                     ),
@@ -48,8 +55,8 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage(
-                    'assets/user_avatar.png',
+                  image: NetworkImage(
+                    "https://project.kuliah.iyabos.com/topup-v1/images/${user.image!}",
                   ),
                 ),
               ),

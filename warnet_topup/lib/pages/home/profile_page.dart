@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:warnet_topup/models/users_model.dart';
+import 'package:warnet_topup/providers/auth_provider.dart';
 import 'package:warnet_topup/theme.dart';
+import 'package:warnet_topup/currency.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    UsersModel user = authProvider.user;
+
     Widget header() {
       return AppBar(
         backgroundColor: bgColor_1,
@@ -19,8 +27,8 @@ class ProfilePage extends StatelessWidget {
                 Row(
                   children: [
                     ClipOval(
-                      child: Image.asset(
-                        "assets/user_avatar.png",
+                      child: Image.network(
+                        "https://project.kuliah.iyabos.com/topup-v1/images/${user.image!}",
                         width: 64,
                       ),
                     ),
@@ -32,14 +40,14 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Khazim Fikri",
+                            "${user.fullname}",
                             style: primaryTextStyle.copyWith(
                               fontSize: 20,
                               fontWeight: semibold,
                             ),
                           ),
                           Text(
-                            "@khazimstar",
+                            "@${user.username}",
                             style: subtitleTextStyle.copyWith(
                               fontSize: 16,
                             ),
@@ -81,7 +89,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Rp 50.000",
+                        "${CurrencyFormat.convertToIdr(user.balance, 0)}",
                         style: priceTextStyle.copyWith(
                           fontSize: 16,
                         ),
