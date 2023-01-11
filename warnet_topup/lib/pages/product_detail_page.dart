@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:warnet_topup/currency.dart';
 import 'package:warnet_topup/models/games_model.dart';
 import 'package:warnet_topup/models/nominal_model.dart';
 import 'package:warnet_topup/models/servers_model.dart';
+import 'package:warnet_topup/models/users_model.dart';
+import 'package:warnet_topup/pages/order/checkout_page.dart';
+import 'package:warnet_topup/providers/auth_provider.dart';
 import 'package:warnet_topup/providers/nominal_provider.dart';
 import 'package:warnet_topup/theme.dart';
 
@@ -23,11 +27,34 @@ class _ProductDetailState extends State<ProductDetail> {
   //   {'id': 2, 'name': 'b'},
   //   {'id': 3, 'name': 'c'},
   // ];
+  toCheckout(String playerID, String zonaID, String? server, String nominal,
+      GamesModel game) async {
+    await Provider.of<NominalProvider>(context, listen: false)
+        .getPriceByNominal(widget.game.id!, nominal);
+
+    NominalProvider nominalProvider =
+        Provider.of<NominalProvider>(context, listen: false);
+    int price = nominalProvider.price;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            CheckoutPage(playerID, zonaID, server, nominal, price, game),
+      ),
+    );
+  }
+
   String? valueNominalName;
   String? valueServerName;
+  TextEditingController playerID = TextEditingController(text: '');
+  TextEditingController zoneID = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UsersModel user = authProvider.user;
+
     Widget header() {
       return Column(
         children: [
@@ -106,6 +133,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: playerID,
                       style: primaryTextStyle,
                       decoration: InputDecoration.collapsed(
                         hintText: "FreeFire Player ID",
@@ -162,6 +190,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: zoneID,
                       style: primaryTextStyle,
                       decoration: InputDecoration.collapsed(
                         hintText: "Player's Zone ID",
@@ -339,7 +368,8 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/checkout');
+              toCheckout(playerID.text, zoneID.text, valueServerName,
+                  valueNominalName!, widget.game);
             },
           ),
         ),
@@ -422,7 +452,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     ),
                   ),
                   Text(
-                    "Rp 50.000",
+                    "${CurrencyFormat.convertToIdr(user.balance, 0)}",
                     style: priceTextStyle.copyWith(
                       fontSize: 16,
                     ),

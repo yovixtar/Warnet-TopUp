@@ -1,8 +1,24 @@
 import "package:flutter/material.dart";
+import 'package:warnet_topup/currency.dart';
+import 'package:warnet_topup/models/games_model.dart';
 import 'package:warnet_topup/theme.dart';
 
 class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({super.key});
+  const CheckoutPage(
+    this.player_id,
+    this.zona_id,
+    this.servers,
+    this.nominal,
+    this.price,
+    this.game, {
+    super.key,
+  });
+  final String player_id;
+  final String zona_id;
+  final String? servers;
+  final String nominal;
+  final int price;
+  final GamesModel game;
 
   AppBar header() {
     return AppBar(
@@ -15,6 +31,159 @@ class CheckoutPage extends StatelessWidget {
           fontSize: 18,
         ),
       ),
+    );
+  }
+
+  Widget playerID() {
+    return Row(
+      children: [
+        Image.asset(
+          'assets/username_icon.png',
+          width: 30,
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Player ID",
+              style: subtitleTextStyle.copyWith(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "${player_id}",
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: regular,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget defaultSpaceDetail() {
+    return SizedBox(
+      height: 20,
+    );
+  }
+
+  Widget zonaID() {
+    return Row(
+      children: [
+        Icon(
+          Icons.place,
+          color: primaryColor,
+          size: 30,
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Zone ID",
+              style: subtitleTextStyle.copyWith(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "${zona_id}",
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: regular,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget serverloc() {
+    return Row(
+      children: [
+        Icon(
+          Icons.cast_connected,
+          color: primaryColor,
+          size: 30,
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Server Loc",
+              style: subtitleTextStyle.copyWith(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "${servers}",
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: regular,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget nominal_topup() {
+    return Row(
+      children: [
+        Icon(
+          Icons.attach_money,
+          color: primaryColor,
+          size: 30,
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Nominal",
+              style: subtitleTextStyle.copyWith(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "${nominal}",
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: regular,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -41,113 +210,19 @@ class CheckoutPage extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          Row(
-            children: [
-              Image.asset(
-                'assets/username_icon.png',
-                width: 30,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Player ID",
-                    style: subtitleTextStyle.copyWith(
-                      fontSize: 14,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "123456789",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: regular,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.place,
-                color: primaryColor,
-                size: 30,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Zone ID",
-                    style: subtitleTextStyle.copyWith(
-                      fontSize: 14,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "5423",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: regular,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.cast_connected,
-                color: primaryColor,
-                size: 30,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Server Loc",
-                    style: subtitleTextStyle.copyWith(
-                      fontSize: 14,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Asia",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: regular,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          )
+          playerID(),
+          (zona_id != "")
+              ? Column(
+                  children: [defaultSpaceDetail(), zonaID()],
+                )
+              : Container(),
+          (servers != null)
+              ? Column(
+                  children: [defaultSpaceDetail(), serverloc()],
+                )
+              : Container(),
+          defaultSpaceDetail(),
+          nominal_topup(),
         ],
       ),
     );
@@ -183,7 +258,7 @@ class CheckoutPage extends StatelessWidget {
                 ),
               ),
               Text(
-                "50.000",
+                "${CurrencyFormat.convertToIdr(price, 0)}",
                 style: primaryTextStyle.copyWith(
                   fontSize: 14,
                   fontWeight: regular,
@@ -232,7 +307,7 @@ class CheckoutPage extends StatelessWidget {
                 ),
               ),
               Text(
-                "Rp 52.000",
+                "${CurrencyFormat.convertToIdr(price + 2000, 0)}",
                 style: priceTextStyle.copyWith(
                   fontSize: 16,
                   fontWeight: regular,

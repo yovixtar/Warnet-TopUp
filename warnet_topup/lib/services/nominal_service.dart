@@ -25,4 +25,20 @@ class NominalService {
       throw Exception('Gagal Get Game Nominal');
     }
   }
+
+  Future<int> getPriceByNominal(int id, String name) async {
+    var response = await http.get(
+      Uri.parse(baseUrl +
+          "/get_price_by_nominal.php?game_id=${id}&nominal_name=${name}"),
+    );
+
+    if (jsonDecode(response.body)['meta']['status'] == 'success') {
+      int data = jsonDecode(response.body)['data']['price'];
+      print(data);
+
+      return data;
+    } else {
+      throw Exception('Gagal Get Game Price Topup');
+    }
+  }
 }

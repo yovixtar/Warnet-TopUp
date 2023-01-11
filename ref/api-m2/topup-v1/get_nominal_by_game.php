@@ -19,6 +19,7 @@ $result_send = [];
 foreach ($result_nominal as $row_nominal) {
     $row_nominal['id'] = (int) $row_nominal['id'];
     $row_nominal['game_id'] = (int) $row_nominal['game_id'];
+    $row_nominal['price'] = (int) $row_nominal['price'];
     array_push($result_send, $row_nominal);
 }
 echo json_encode(
