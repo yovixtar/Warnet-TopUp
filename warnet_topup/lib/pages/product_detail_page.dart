@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:warnet_topup/models/games_model.dart';
+import 'package:warnet_topup/models/nominal_model.dart';
+import 'package:warnet_topup/models/servers_model.dart';
+import 'package:warnet_topup/providers/nominal_provider.dart';
 import 'package:warnet_topup/theme.dart';
 
-class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+class ProductDetail extends StatefulWidget {
+  const ProductDetail(this.game, this.nominal, this.servers, {super.key});
+
+  final GamesModel game;
+  final List<NominalModel> nominal;
+  final List<ServersModel> servers;
+
+  @override
+  State<ProductDetail> createState() => _ProductDetailState();
+}
+
+class _ProductDetailState extends State<ProductDetail> {
+  // final items = [
+  //   {'id': 1, 'name': 'a'},
+  //   {'id': 2, 'name': 'b'},
+  //   {'id': 3, 'name': 'c'},
+  // ];
+  String? valueNominalName;
+  String? valueServerName;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +61,7 @@ class ProductDetail extends StatelessWidget {
             height: 40,
           ),
           Text(
-            "Free Fire",
+            "${widget.game.name}",
             style: primaryTextStyle.copyWith(fontSize: 30),
           ),
         ],
@@ -156,94 +178,71 @@ class ProductDetail extends StatelessWidget {
     }
 
     Widget ServerInput() {
-      return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-          margin: EdgeInsets.only(
-            top: 25,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Server",
-                style: TextStyle(
-                  color: primaryText,
-                  fontSize: 18,
-                  fontWeight: medium,
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              top: 25,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Pilih Server",
+                  style: TextStyle(
+                    color: primaryText,
+                    fontSize: 18,
+                    fontWeight: medium,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 13,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: primaryColor,
-                      ),
-                      child: Text(
-                        'Asia',
-                        style: primaryTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: medium,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 13,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: transparanColor,
-                          border: Border.all(
-                            color: subtitleText,
-                          )),
-                      child: Text(
-                        'Europe',
-                        style: subtitleTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: medium,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 13,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: transparanColor,
-                          border: Border.all(
-                            color: subtitleText,
-                          )),
-                      child: Text(
-                        'America',
-                        style: subtitleTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: medium,
-                        ),
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 12,
                 ),
-              ),
-            ],
+                Container(
+                  padding: EdgeInsets.only(
+                    left: 45,
+                    right: 20,
+                    top: 5,
+                    bottom: 5,
+                  ),
+                  decoration: BoxDecoration(
+                      color: bgColor_2,
+                      borderRadius: BorderRadius.circular(10)),
+
+                  // dropdown below..
+                  child: DropdownButton(
+                    value: valueServerName,
+                    onChanged: (String? newValue) => setState(() {
+                      valueServerName = newValue!;
+                    }),
+                    items: widget.servers.map(
+                      (item) {
+                        return DropdownMenuItem(
+                          value: item.name,
+                          child: Text(
+                            item.name.toString(),
+                            style: TextStyle(
+                              color: priceColor,
+                              fontSize: 16,
+                              fontWeight: medium,
+                            ),
+                          ),
+                        );
+                      },
+                    ).toList(),
+
+                    // add extra sugar..
+                    icon: Icon(Icons.arrow_drop_down),
+                    iconSize: 42,
+                    underline: SizedBox(),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ]);
+        ],
+      );
     }
 
     Widget CurrencyInput() {
@@ -268,87 +267,45 @@ class ProductDetail extends StatelessWidget {
                 SizedBox(
                   height: 12,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 13,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: primaryColor,
-                        ),
-                        child: Text(
-                          '10 Diamonds',
-                          style: primaryTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: medium,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 13,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: primaryColor,
-                        ),
-                        child: Text(
-                          '10 Diamonds',
-                          style: primaryTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: medium,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 13,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: primaryColor,
-                        ),
-                        child: Text(
-                          '10 Diamonds',
-                          style: primaryTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: medium,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 13,
-                        ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: transparanColor,
-                            border: Border.all(
-                              color: subtitleText,
-                            )),
-                        child: Text(
-                          '50 Diamonds',
-                          style: subtitleTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: medium,
-                          ),
-                        ),
-                      ),
-                    ],
+                Container(
+                  padding: EdgeInsets.only(
+                    left: 45,
+                    right: 20,
+                    top: 5,
+                    bottom: 5,
                   ),
-                ),
+                  decoration: BoxDecoration(
+                      color: bgColor_2,
+                      borderRadius: BorderRadius.circular(10)),
+
+                  // dropdown below..
+                  child: DropdownButton(
+                    value: valueNominalName,
+                    onChanged: (String? newValue) => setState(() {
+                      valueNominalName = newValue!;
+                    }),
+                    items: widget.nominal.map(
+                      (item) {
+                        return DropdownMenuItem(
+                          value: item.name,
+                          child: Text(
+                            item.name.toString(),
+                            style: TextStyle(
+                              color: priceColor,
+                              fontSize: 16,
+                              fontWeight: medium,
+                            ),
+                          ),
+                        );
+                      },
+                    ).toList(),
+
+                    // add extra sugar..
+                    icon: Icon(Icons.arrow_drop_down),
+                    iconSize: 42,
+                    underline: SizedBox(),
+                  ),
+                )
               ],
             ),
           ),
@@ -398,6 +355,7 @@ class ProductDetail extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(24),
+            bottom: Radius.circular(24),
           ),
           color: bgColor_1,
         ),
@@ -417,7 +375,7 @@ class ProductDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Top Up Free Fire",
+                          "Top Up ${widget.game.name}",
                           style: primaryTextStyle.copyWith(
                             fontSize: 18,
                             fontWeight: semibold,
@@ -427,7 +385,7 @@ class ProductDetail extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          "Game FPS",
+                          "${widget.game.category_name}",
                           style: subtitleTextStyle.copyWith(
                             fontSize: 12,
                           ),
@@ -481,7 +439,11 @@ class ProductDetail extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  idEmailInput(),
+                  (widget.game.player_id == "true")
+                      ? idEmailInput()
+                      : Container(),
+                  (widget.game.zone_id == "true") ? zonaInput() : Container(),
+                  (widget.game.servers == "true") ? ServerInput() : Container(),
                   CurrencyInput(),
                   submitButton(),
                 ],
@@ -498,6 +460,9 @@ class ProductDetail extends StatelessWidget {
         children: [
           header(),
           content(),
+          SizedBox(
+            height: 30,
+          ),
         ],
       ),
     );

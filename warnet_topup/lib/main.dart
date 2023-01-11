@@ -11,6 +11,8 @@ import 'package:warnet_topup/pages/auth/splash_page.dart';
 import 'package:warnet_topup/providers/auth_provider.dart';
 import 'package:warnet_topup/providers/categories_provider.dart';
 import 'package:warnet_topup/providers/games_provider.dart';
+import 'package:warnet_topup/providers/nominal_provider.dart';
+import 'package:warnet_topup/providers/servers_provider.dart';
 // import 'theme.dart';
 
 void main() => runApp(MyApp());
@@ -30,7 +32,13 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CategoriesProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NominalProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ServersProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,7 +47,6 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignInPage(),
           '/home': (context) => MainPage(),
           '/orders': (context) => OrderPage(),
-          '/product-detail': ((context) => ProductDetail()),
           '/checkout': ((context) => CheckoutPage()),
           '/checkout-success': ((context) => CheckoutSuccessPage()),
         },

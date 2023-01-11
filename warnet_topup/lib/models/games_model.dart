@@ -10,6 +10,7 @@ class GamesModel {
   String? image;
   String? player_id;
   String? zone_id;
+  String? servers;
   // List<NominalModel>? nominal;
   // List<ServersModel>? servers;
 
@@ -21,6 +22,7 @@ class GamesModel {
     this.image,
     this.player_id,
     this.zone_id,
+    this.servers,
     // this.nominal,
     // this.servers,
   });
@@ -33,6 +35,7 @@ class GamesModel {
     image = json['image'];
     player_id = json['player_id'];
     zone_id = json['zone_id'];
+    servers = json['servers'];
     // nominal = json['nominal']
     //     .map<NominalModel>((nominal) => NominalModel.fromJson(nominal))
     //     .toList();
@@ -49,6 +52,7 @@ class GamesModel {
       'image': image,
       'player_id': player_id,
       'zone_id': zone_id,
+      'servers': servers,
       // 'nominal': nominal!.map((nominal) => nominal.toJson()).toList(),
       // 'servers': servers!.map((server) => server.toJson()).toList(),
     };

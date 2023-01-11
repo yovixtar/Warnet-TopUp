@@ -1,0 +1,40 @@
+Users
+- username
+- password
+- fullname
+- image
+- balance
+- token
+
+Games
+- name
+- category : {id, name}
+- image
+- player_id : bool
+- zone_id : bool
+- nominal : [{id, amount, name}]
+- server : [{id, name}]
+
+Categories
+- name
+
+Nominal
+- amount
+- name
+- game_id
+
+Servers
+- name
+- game_id
+
+Orders
+- user_id
+- game_id
+- player_id
+- zone_id
+- server
+- order_at
+
+wishlist
+- user_id
+- game_id
